@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# colect info from multiple machines, ssh key auth must be working first.
+
+# myself, angela
+$HOME/bin/nvidiaInfoOnce
+
+# melania
+ssh rudi@192.168.0.101 "~/bin/nvidiaInfoOnce"
+
+
