@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# toTheMoonWrap
+
+ssh rudi@rok "~/bin/toTheMoon"
