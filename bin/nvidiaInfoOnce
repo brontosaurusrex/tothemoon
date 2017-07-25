@@ -5,5 +5,10 @@
 h=$(hostname)
 u=$(uptime -p)
 
-echo "$h, $u"
-nvidia-smi --query-gpu=index,timestamp,power.draw,clocks.sm,fan.speed,temperature.gpu --format=csv
+bmiltime() {
+	echo "$(date +%H%M%^b%d%y)"
+	}
+
+t=$(bmiltime)
+echo "$h, $t, $u"
+nvidia-smi --query-gpu=index,power.draw,clocks.sm,fan.speed,temperature.gpu --format=csv
