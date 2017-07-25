@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# toTheMoonWrap
+
+# usage: run without parameters to run once, 
+# run with "rep" to repeat every "timeToSleep" seconds.
+
+timeToSleep="60"
+
+repeat() {
+    while :
+    do
+        echo "$(date +%H%M%^b%d%y)"
+        ssh rudi@rok "~/bin/toTheMoon"
+        sleep "$timeToSleep"
+        echo
+    done
+}
+
+once() {
+        echo "$(date +%H%M%^b%d%y)"
+        ssh rudi@rok "~/bin/toTheMoon"
+}
+
+case "$1" in
+  "")   once ;;
+  rep)  repeat ;;
+esac

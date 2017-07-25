@@ -1,16 +1,20 @@
 #!/bin/bash
 
 # toTheMoonWrap
+# needs: lynx, figlet
 
 # usage: run without parameters to run once, 
 # run with "rep" to repeat every "timeToSleep" seconds.
 
-timeToSleep="60"
+# example with logging: toTheMoonWrap rep | tee -a ~/enterprise.log
+
+timeToSleep="300" # = 5 minutes
 
 repeat() {
     while :
     do
-        echo "$(date +%H%M%^b%d%y)"
+        echo "$(date +"%H : %M - %d. %^b. %y")" | figlet -f smscript
+        read -r _ temp _<<< $(lynx -dump http://www.arso.gov.si/vreme/napovedi%20in%20podatki/vreme_avt.html | grep Ljubljana) && echo "$temp °C"
         ssh rudi@rok "~/bin/toTheMoon"
         sleep "$timeToSleep"
         echo
@@ -18,7 +22,8 @@ repeat() {
 }
 
 once() {
-        echo "$(date +%H%M%^b%d%y)"
+        echo "$(date +"%H : %M - %d. %^b. %y")" | figlet -f smscript
+        read -r _ temp _<<< $(lynx -dump http://www.arso.gov.si/vreme/napovedi%20in%20podatki/vreme_avt.html | grep Ljubljana) && echo "$temp °C"
         ssh rudi@rok "~/bin/toTheMoon"
 }
 
