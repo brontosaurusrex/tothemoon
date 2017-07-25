@@ -1,4 +1,4 @@
 #!/bin/bash
 
-hostname
+hostname && uptime -p
 nvidia-smi --query-gpu=index,timestamp,power.draw,clocks.sm,fan.speed,temperature.gpu --format=csv
