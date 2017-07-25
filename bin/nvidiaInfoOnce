@@ -1,4 +1,9 @@
 #!/bin/bash
 
-hostname && uptime -p
+# nvidiaInfoOnce
+
+h=$(hostname)
+u=$(uptime -p)
+
+echo "$h, $u"
 nvidia-smi --query-gpu=index,timestamp,power.draw,clocks.sm,fan.speed,temperature.gpu --format=csv
