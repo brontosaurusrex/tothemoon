@@ -5,7 +5,13 @@
 # usage: run without parameters to run once, 
 # run with "rep" to repeat every "timeToSleep" seconds.
 
-timeToSleep="10"
+timeToSleep="100"
+
+bmiltime() {
+    echo "$(date +%H%M%^b%d%y)"
+    }
+
+bmiltime
 
 repeat() {
     while :
