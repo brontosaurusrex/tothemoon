@@ -5,25 +5,21 @@
 # usage: run without parameters to run once, 
 # run with "rep" to repeat every "timeToSleep" seconds.
 
-timeToSleep="100"
-
-bmiltime() {
-    echo "$(date +%H%M%^b%d%y)"
-    }
-
-bmiltime
+timeToSleep="60"
 
 repeat() {
     while :
     do
+        echo "$(date +%H%M%^b%d%y)"
         ssh rudi@rok "~/bin/toTheMoon"
-        echo 
-    sleep "$timeToSleep"
+        sleep "$timeToSleep"
+        echo
     done
 }
 
 once() {
-    ssh rudi@rok "~/bin/toTheMoon"
+        echo "$(date +%H%M%^b%d%y)"
+        ssh rudi@rok "~/bin/toTheMoon"
 }
 
 case "$1" in
