@@ -2,4 +2,25 @@
 
 # toTheMoonWrap
 
-ssh rudi@rok "~/bin/toTheMoon"
+# usage: run without parameters to run once, 
+# run with "rep" to repeat every "timeToSleep" seconds.
+
+timeToSleep="10"
+
+repeat() {
+    while :
+    do
+        ssh rudi@rok "~/bin/toTheMoon"
+        echo 
+    sleep "$timeToSleep"
+    done
+}
+
+once() {
+    ssh rudi@rok "~/bin/toTheMoon"
+}
+
+case "$1" in
+  "")   once ;;
+  rep)  repeat ;;
+esac
