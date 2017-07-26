@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# temperatura
+
+read -r _ temp _<<< $(lynx -dump http://www.arso.gov.si/vreme/napovedi%20in%20podatki/vreme_avt.html | grep Ljubljana) && echo "$temp °C"
