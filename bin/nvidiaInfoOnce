@@ -6,5 +6,5 @@ h=$(hostname)
 u=$(uptime -p)
 
 read -r _ _ _ _ sol _<<< $(lynx -dump http://127.0.0.1:42000 | grep Total) # < miner specific
-echo "$h, $u, $sol Sol/s"
+echo "$h, $sol Sol/s, $u"
 nvidia-smi --query-gpu=index,power.draw,clocks.sm,fan.speed,temperature.gpu --format=csv
