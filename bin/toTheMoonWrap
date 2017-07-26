@@ -7,7 +7,7 @@
 
 # example with logging: toTheMoonWrap rep | tee -a ~/enterprise.log
 
-timeToSleep="30" 
+timeToSleep="120" 
 
 repeat() {
     while :
@@ -15,6 +15,7 @@ repeat() {
         read -r _ temp _<<< $(lynx -dump http://www.arso.gov.si/vreme/napovedi%20in%20podatki/vreme_avt.html | grep Ljubljana)
         echo "$(date +%H%M%^b%d%y), $temp°C"
         ssh rudi@rok "~/bin/toTheMoon"
+        echo "err $?"
         sleep "$timeToSleep"
         echo
     done
@@ -24,10 +25,12 @@ once() {
         read -r _ temp _<<< $(lynx -dump http://www.arso.gov.si/vreme/napovedi%20in%20podatki/vreme_avt.html | grep Ljubljana)
         echo "$(date +%H%M%^b%d%y), $temp°C"
         ssh rudi@rok "~/bin/toTheMoon"
-
+        echo "err $?"
 }
 
 case "$1" in
   "")   once ;;
   rep)  repeat ;;
 esac
+
+
