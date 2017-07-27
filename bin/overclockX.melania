@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# overclock
+# set -x
+
+fan="64"
+offset="180"
+#mem="0"
+
+nvidia () {
+DISPLAY=:10 nvidia-settings "$@"
+}
+
+X :10 &
+Xpid="$!"
+sleep 2
+echo && echo "fans"
+nvidia -a [gpu:0]/GPUFanControlState=1 -a [fan:0]/GPUTargetFanSpeed="$fan" \
+-a [gpu:1]/GPUFanControlState=1 -a [fan:1]/GPUTargetFanSpeed="$fan" \
+-a [gpu:2]/GPUFanControlState=1 -a [fan:2]/GPUTargetFanSpeed="$fan"
+
+echo "clocks"
+nvidia -a [gpu:0]/GPUGraphicsClockOffset[3]="$offset" \
+-a [gpu:1]/GPUGraphicsClockOffset[3]="$offset" \
+-a [gpu:2]/GPUGraphicsClockOffset[3]="130"
+
+
+#echo "memFreqOffset"
+#nvidia -a [gpu:0]/GPUMemoryTransferRateOffset[3]="$mem" \
+#-a [gpu:1]/GPUMemoryTransferRateOffset[3]="$mem" \
+#-a [gpu:2]/GPUMemoryTransferRateOffset[3]="$mem" 
+
+kill "$Xpid" 
+
