@@ -7,7 +7,9 @@
 
 # example with logging: toTheMoonWrap rep | tee -a ~/enterprise.log
 
-timeToSleep="120" 
+timeToSleep="300" 
+
+echo "----------" # < for loging purposes
 
 repeat() {
     while :
