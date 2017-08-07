@@ -7,7 +7,8 @@
 
 # example with logging: toTheMoonWrap rep | tee -a ~/enterprise.log
 
-timeToSleep="300" 
+timeToSleep="300"
+host="somehost.org" # domain or ip
 
 echo "----------" # < for loging purposes
 
@@ -16,7 +17,7 @@ repeat() {
     do
         read -r _ temp _<<< $(lynx -dump http://www.arso.gov.si/vreme/napovedi%20in%20podatki/vreme_avt.html | grep Ljubljana)
         echo "$(date +%H%M%^b%d%y), $temp°C"
-        ssh rudi@rok "~/bin/toTheMoon"
+        ssh rudi@"$host" "~/bin/toTheMoon"
         echo "err $?"
         sleep "$timeToSleep"
         echo
@@ -26,7 +27,7 @@ repeat() {
 once() {
         read -r _ temp _<<< $(lynx -dump http://www.arso.gov.si/vreme/napovedi%20in%20podatki/vreme_avt.html | grep Ljubljana)
         echo "$(date +%H%M%^b%d%y), $temp°C"
-        ssh rudi@rok "~/bin/toTheMoon"
+        ssh rudi@"$host" "~/bin/toTheMoon"
         echo "err $?"
 }
 
