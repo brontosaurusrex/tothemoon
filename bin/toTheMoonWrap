@@ -12,13 +12,25 @@ host="somehost.org" # domain or ip
 
 echo "----------" # < for loging purposes
 
+beep () {
+    ( speaker-test -t sine -f 1000 ) > /dev/null 2>&1 & pid=$! 
+    sleep 0.1s
+    { kill -9 $pid;wait $pid; } > /dev/null 2>&1
+}
+
 repeat() {
     while :
     do
         read -r _ temp _<<< $(lynx -dump http://www.arso.gov.si/vreme/napovedi%20in%20podatki/vreme_avt.html | grep Ljubljana)
         echo "$(date +%H%M%^b%d%y), $temp°C"
         ssh rudi@"$host" "~/bin/toTheMoon"
-        echo "err $?"
+        
+        err="$?" && echo "err $err"
+        if [ $err != 0 ]; then
+        notify-send "ups $err"
+        beep
+        fi
+        
         sleep "$timeToSleep"
         echo
     done
