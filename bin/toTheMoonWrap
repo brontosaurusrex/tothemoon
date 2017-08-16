@@ -16,9 +16,11 @@ echo "----------" # < for loging purposes
 # make some noise
 beep () {
     ( speaker-test -t sine -f 1000 ) > /dev/null 2>&1 & pid=$! 
-    sleep 0.1s
+    sleep 0.2s
     { kill -9 $pid;wait $pid; } > /dev/null 2>&1
 }
+beep; beep; beep # test beeping
+
 
 # ambient temperature
 ambientTemperature () {
@@ -36,7 +38,7 @@ repeat() {
         err="$?" && echo "err $err"
         if [ $err != 0 ]; then
         notify-send "ups $err"
-        beep
+        beep; beep; beep
         fi
         
         sleep "$timeToSleep"
