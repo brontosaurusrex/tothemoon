@@ -13,16 +13,11 @@ host="somehost.org" # domain or ip
 
 echo "----------" # < for loging purposes
 
-# make some noise
 beep () {
     ( speaker-test -t sine -f 1000 ) > /dev/null 2>&1 & pid=$! 
     sleep 0.2s
     { kill -9 $pid;wait $pid; } > /dev/null 2>&1
 }
-beep; beep; beep # test beeping
-
-
-# ambient temperature
 ambientTemperature () {
     read -r _ temp _<<< $(lynx -dump http://www.arso.gov.si/vreme/napovedi%20in%20podatki/vreme_avt.html | grep Ljubljana)
     # $temp will now hold the value
@@ -33,11 +28,15 @@ repeat() {
     do
         ambientTemperature
         echo "$(date +%H%M%^b%d%y), $temp°C"
-        ssh rudi@"$host" "~/bin/toTheMoon"
-        
-        err="$?" && echo "err $err"
-        if [ $err != 0 ]; then
-        notify-send "ups $err"
+        tmp=$(ssh rudi@"$host" "~/bin/toTheMoon")
+        echo "$tmp" 
+
+        read -r _ globalerr <<< $(echo "$tmp" | tail -n 1) # 2nd thing from last line must be error count        
+
+        #echo "globalerr $globalerr"
+
+        if [ $globalerr != 0 ]; then
+        notify-send "ups"
         beep; beep; beep
         fi
         
@@ -50,7 +49,6 @@ once() {
         ambientTemperature
         echo "$(date +%H%M%^b%d%y), $temp°C"
         ssh rudi@"$host" "~/bin/toTheMoon"
-        echo "err $?"
 }
 
 case "$1" in
