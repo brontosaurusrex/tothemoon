@@ -12,5 +12,9 @@ $HOME/bin/nvidiaInfoOnce
 ssh rudi@192.168.0.101 "~/bin/nvidiaInfoOnce"
 (( $? != 0 )) && let errcount++
 
+# latoya
+ssh rudi@192.168.0.103 "~/bin/nvidiaInfoOnce"
+(( $? != 0 )) && let errcount++
+
 # this is parsed by toTheMoonWrap:
 echo "errcount $errcount"
