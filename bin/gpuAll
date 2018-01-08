@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# colect info from multiple machines, ssh key auth must be working first.
+
+# myself, angela
+echo "angela"
+"$HOME/bin/gpu"
+
+# melania
+echo "melania"
+ssh rudi@192.168.0.101 "~/bin/gpu"
+
+# latoya
+echo "latoya"
+ssh rudi@192.168.0.103 "~/bin/gpu"
