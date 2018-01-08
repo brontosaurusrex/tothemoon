@@ -1,0 +1,1 @@
+nvidia-smi -q -d UTILIZATION | grep Gpu | grep -Eo "[0-9]{1,3}"
