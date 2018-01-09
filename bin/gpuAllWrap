@@ -7,7 +7,7 @@
 
 # example with logging: gpuAllWrap rep | tee -a ~/enterprise.log
 
-timeToSleep="60"
+timeToSleep="5"
 host="somehost.org" # domain or ip
 user="user"         # username
 
@@ -15,7 +15,7 @@ repeat() {
     while :
     do
 
-        ssh "$user"@"$host" "~/bin/gpuAll" | tr "\n" " " 
+        ssh "$user"@"$host" "~/bin/gpuAll" | tr '\n' ' '
         sleep "$timeToSleep"
         echo
     done
@@ -23,7 +23,8 @@ repeat() {
 
 once() {
 
-        ssh "$user"@"$host" "~/bin/gpuAll" | tr "\n" " " 
+        ssh "$user"@"$host" "~/bin/gpuAll" | tr '\n' ' '
+        echo
 }
 
 case "$1" in
