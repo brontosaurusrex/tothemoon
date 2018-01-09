@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# gpuAllWrap
+
+# usage: run without parameters to run once, 
+# run with "rep" to repeat every "timeToSleep" seconds.
+
+# example with logging: gpuAllWrap rep | tee -a ~/enterprise.log
+
+timeToSleep="60"
+host="somehost.org" # domain or ip
+user="user"         # username
+
+repeat() {
+    while :
+    do
+
+        ssh "$user"@"$host" "~/bin/gpuAll" | tr "\n" " " 
+        sleep "$timeToSleep"
+        echo
+    done
+}
+
+once() {
+
+        ssh "$user"@"$host" "~/bin/gpuAll" | tr "\n" " " 
+}
+
+case "$1" in
+  "")   once ;;
+  rep)  repeat ;;
+esac
+
+
