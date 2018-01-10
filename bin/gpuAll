@@ -3,13 +3,13 @@
 # colect info from multiple machines, ssh key auth must be working first.
 
 # myself, angela
-echo "ang"
-"$HOME/bin/gpu"
+echo -n "A "
+"$HOME/bin/gpu" | tr '\n' ' '
 
 # melania
-echo "mel"
-ssh rudi@192.168.0.101 "~/bin/gpu"
+echo -n "M "
+ssh rudi@192.168.0.101 "~/bin/gpu | tr '\n' ' '"
 
 # latoya
-echo "lat"
-ssh rudi@192.168.0.103 "~/bin/gpu"
+echo -n "L "
+ssh rudi@192.168.0.103 "~/bin/gpu | tr '\n' ' '"
