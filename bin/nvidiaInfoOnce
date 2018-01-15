@@ -12,4 +12,4 @@ u=$(uptime -p)
 # generic
 echo "$h, $u"
 
-nvidia-smi --query-gpu=index,utilization.gpu,power.draw,clocks.sm,fan.speed,temperature.gpu --format=csv
+nvidia-smi --query-gpu=index,utilization.gpu,power.draw,clocks.sm,fan.speed,temperature.gpu --format=csv | column -s, -t
