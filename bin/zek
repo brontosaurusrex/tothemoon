@@ -1,0 +1,3 @@
+overclockX &
+
+cd "$HOME/apps/ewbf_cuda/0.3.4b/" && ./miner
